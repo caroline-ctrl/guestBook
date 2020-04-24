@@ -8,7 +8,7 @@
     - un bouton
     (le formulaire devra être validé et on n'acceptera pas les pseudo de moins de 3 caracrères ni les messages de moins de 10 caractères)
 - On créera un fichier "messages" qui contiendra un message par ligne
-(on utilisera serialize et un tableau ['username' => '......', 'message' => '......', 'date' => ])
+(on utilisera serialize et un tableau ['username' => '......', 'message' => '......', 'date' => .....])
     - Pour "serializer" les messages on utilisera les fonction json_encode(tableau) et json_decode(tableau, true)
 - La page devra afficher tous les messages sous le formuaire formaté de la manière suivante
 <p>
@@ -20,9 +20,9 @@
 ## Restriction
 
 - Utiliser une classe pour présenter un Message :
-    - new Message(string $username, string $message, DateTime $date),
+    - new Message(string $username, string $message, DateTime $date = null),
     - isValid(): bool
-    - gerErrors(): array
+    - getErrors(): array
     - toHTML(): string
     - toJSON(): string
     - Message::fromJSON(string): Message
