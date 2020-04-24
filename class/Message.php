@@ -11,6 +11,9 @@
 
 class Message
 {
+    public $username;
+    public $message;
+    public $date;
 
     public function __construct(string $username, string $message, DateTime $date = null)
     {
@@ -23,10 +26,10 @@ class Message
     // verifie si le pseudo et le message est valide (nbr de caractère)
     public function isValid(): bool
     {
-        if (strlen($this->username) > 3 && strlen($this->message > 10)){
-            return true;
-        } else {
+        if ((strlen($this->username) < 3) && (strlen($this->message < 10))){
             return false;
+        } else {
+            return true;
         }
     }
     
@@ -34,7 +37,10 @@ class Message
     // renvoie un tableau comprenant les erreurs (indexé par le nom du champs)
     public function getErrors(): array
     {
-
+        return $arrayError[] = [
+            'username' => 'Ce pseudo est trop court',
+            'message' => 'Ce message est trop court'
+        ];
     }
 
 
