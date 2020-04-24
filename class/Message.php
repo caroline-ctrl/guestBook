@@ -12,44 +12,49 @@
 class Message
 {
 
-    // public $username;
-    // public $message;
-    // public $date;
-
     public function __construct(string $username, string $message, DateTime $date = null)
     {
         $this->username = $username;
         $this->message = $message;
         $this->date = $date;
     }
+    
 
-
+    // verifie si le pseudo et le message est valide (nbr de caractère)
     public function isValid(): bool
     {
-
+        if (strlen($this->username) > 3 && strlen($this->message > 10)){
+            return true;
+        } else {
+            return false;
+        }
     }
-
-
+    
+    
+    // renvoie un tableau comprenant les erreurs (indexé par le nom du champs)
     public function getErrors(): array
     {
 
     }
 
 
+    // convertit le message en html
     public function toHTML(): string
     {
 
     }
 
 
+    // convertit en json en utilisant la fonction json_encode
     public function toJSON(): string
     {
 
     }
 
 
+    // methode static (on passe le json et renvoie un message)
     public static function fromJSON(): Message
     {
-        
+
     }
 }
