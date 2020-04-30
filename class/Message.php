@@ -63,7 +63,7 @@ class Message
     public function toHTML(): string
     {
         $username = htmlentities($this->username);
-        $this->date->setTimezone(new DateTime('Europe/Paris'));
+        $this->date->setTimezone(new DateTimeZone('Europe/Paris'));
         $date = $this->date->format('d/m/Y à H:i');
         $message = htmlentities($this->message);
         return <<<HTML

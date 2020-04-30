@@ -17,9 +17,13 @@ if (isset($_POST['username'], $_POST['message'])) {
 }
 
 $messages = $guestBook->getMessage();
+
 $title = "Livre d'or";
 require __DIR__ . DIRECTORY_SEPARATOR . 'elements' . DIRECTORY_SEPARATOR . 'header.php';
 ?>
+
+
+
 
 <h1 class="mt-5">Livre d'or</h1>
 
@@ -63,7 +67,8 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'elements' . DIRECTORY_SEPARATOR . 'head
 <?php foreach ($messages as $message): ?>
     <?= $message->toHTML() ?>
 <?php endforeach ?>
-
+<?php else: ?>
+<h1>Aucun message</h1>
 <?php endif ?>
 
 
