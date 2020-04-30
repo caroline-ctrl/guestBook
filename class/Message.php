@@ -71,7 +71,6 @@ class Message
         <strong>{$username}</strong> <em>le {$date}</em><br>
         {$message}
     </p>
-
 HTML;
     }
 

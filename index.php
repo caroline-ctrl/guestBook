@@ -55,6 +55,8 @@ require __DIR__ . DIRECTORY_SEPARATOR . 'elements' . DIRECTORY_SEPARATOR . 'head
     <button type="submit" class="btn btn-info">Envoyer</button>
 </form>
 
+
+
 <?php if (!empty($messages)): ?>
 <h1 class="mt-5">Vos messages</h1>
 
