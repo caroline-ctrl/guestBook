@@ -1,4 +1,9 @@
 <?php
+/**
+ * Gére l'api d'openWeather
+ * 
+ * @author Caroline Duon <duon.caroline@gmail.com>
+ */
 class OpenWeather
 {
     private $key;
@@ -8,7 +13,13 @@ class OpenWeather
         $this->key = $key;
     }
 
-
+    
+    /**
+     * Récupère les informations météorologique du jour
+     *
+     * @param  string $position Ville (ex: "Montpellier,fr")
+     * @return array
+     */
     public function getToday(string $position): ?array
     {
         $data = $this->callAPI("weather?q={$position}");
@@ -20,7 +31,13 @@ class OpenWeather
     }
 
 
-
+    
+    /**
+     * Récupère les prévisions sur plusieurs jours
+     *
+     * @param  string $position
+     * @return array[]
+     */
     public function getForecast(string $position): ?array
     {
         $data = $this->callAPI("forecast/daily?q={$position}");
@@ -34,7 +51,13 @@ class OpenWeather
         return $result;
     }
 
-
+    
+    /**
+     * appelle l'api Open weather
+     *
+     * @param  string $endpoint Action a appeler (weather, forecast/day)
+     * @return array
+     */
     private function callAPI(string $endpoint): ?array
     {
         $ressource = curl_init("http://api.openweathermap.org/data/2.5/{$endpoint}&appid={$this->key}&units=metric&lang=fr");
