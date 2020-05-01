@@ -9,11 +9,35 @@ class OpenWeather
     }
 
 
-    public function getForecast(string $position)
+    public function getToday(string $position): ?array
     {
-        // $date = new DateTime();
-        // $newDate = $date->format('d/m/Y');
-        $ressource = curl_init("http://api.openweathermap.org/data/2.5/forecast/daily?q={$position}&cnt=16&appid={$this->key}&units=metric&lang=fr");
+        $data = $this->callAPI("weather?q={$position}");
+        return [
+            'temp' => $data['main']['temp'],
+            'description' => $data['weather'][0]['description'],
+            'date' => new DateTime()
+        ];
+    }
+
+
+
+    public function getForecast(string $position): ?array
+    {
+        $data = $this->callAPI("forecast/daily?q={$position}");
+        foreach ($data['list'] as $day) {
+            $result[] = [
+                'temp' => $day['temp']['day'],
+                'description' => $day['weather'][0]['description'],
+                'date' => new DateTime('@' . $day['dt'])
+            ];
+        }
+        return $result;
+    }
+
+
+    private function callAPI(string $endpoint): ?array
+    {
+        $ressource = curl_init("http://api.openweathermap.org/data/2.5/{$endpoint}&appid={$this->key}&units=metric&lang=fr");
         curl_setopt_array($ressource, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 2
@@ -22,18 +46,6 @@ class OpenWeather
         if ($data === false || curl_getinfo($ressource, CURLINFO_HTTP_CODE) !== 200) {
             var_dump(curl_error($ressource));
         }
-        $result = [];
-        $data = json_decode($data, true);
-
-        foreach($data['list'] as $day){
-            $result[] = [
-                'temp' => $day['temp']['day'],
-                'description' => $day['weather'][0]['description'],
-                'date' => new DateTime('@' . $day['dt'])
-            ];
-        }
-
+        return json_decode($data, true);
     }
-
-
 }
