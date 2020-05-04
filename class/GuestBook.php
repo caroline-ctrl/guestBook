@@ -1,6 +1,10 @@
 <?php
 require_once 'Message.php';
-
+/**
+  * gére l'enregistrement et la récupération des info présent le fichier.
+  *
+  * @author  Grafikart
+  */
 class GuestBook
 {
     private $file;
@@ -18,14 +22,24 @@ class GuestBook
     }
 
 
-    // sauvegarde les message
+    
+    /**
+     * addMessage: sauvegarde les messages dans le fichier "messages"
+     *
+     * @param  array $message
+     * @return void
+     */
     public function addMessage(Message $message)
     {
         file_put_contents($this->file, $message->toJSON() . PHP_EOL, FILE_APPEND);
     }
 
-
-    // permet de les récupèrer
+   
+    /**
+     * getMessage: permet de les récupèrer  dans le fichier "messages"
+     *
+     * @return array
+     */
     public function getMessage(): array
     {
         $content = trim(file_get_contents($this->file));

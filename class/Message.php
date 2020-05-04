@@ -1,14 +1,9 @@
 <?php
-// classe qui represente les message
-// si date null mettre la date du jour
 /**
- *   - isValid(): bool => verifie si le pseudo et le pswd est valide (nbr de caractère)
-  *  - getErrors(): array =>  renvoie un tableau comprenant les erreurs (indexé par le nom du champs)
-  *  - toHTML(): string => convertit le message en html
-  *  - toJSON(): string => convertit en json en utilisant la fonction json_encode
-  *  - Message::fromJSON(string): Message => methode static (on passe le json et renvoie un message)
- */
-
+  * gére la récupération des messages et pseudo laissé sur le livre d'or.
+  *
+  * @author  Grafikart
+  */
 class Message
 {
     const LIMIT_USERNAME = 3;
@@ -25,7 +20,11 @@ class Message
     }
     
 
-    // verifie si le pseudo et le message est valide (nbr de caractère)
+    /**
+     * isValid: verifie si le pseudo et le message sont valides grace a une autre methode 
+     *
+     * @return bool
+     */
     public function isValid(): bool
     {
         // return strlen($this->username) >= 3 && strlen($this->message) >= 10;
@@ -34,7 +33,12 @@ class Message
     }
     
     
-    // renvoie un tableau comprenant les erreurs (indexé par le nom du champs)
+    
+    /**
+     * getErrors: renvoie un tableau comprenant les erreurs
+     *
+     * @return array
+     */
     public function getErrors(): array
     {
         $errors = [];
@@ -48,7 +52,12 @@ class Message
     }
 
 
-    // convertit en json en utilisant la fonction json_encode
+   
+    /**
+     * toJSON: convertit et retourne en json
+     *
+     * @return string
+     */
     public function toJSON(): string
     {
         return json_encode([
@@ -59,7 +68,12 @@ class Message
     }
     
     
-    // convertit le message en html
+    
+    /**
+     * toHTML: convertit et retourne le message en html
+     *
+     * @return string
+     */
     public function toHTML(): string
     {
         $username = htmlentities($this->username);
@@ -74,10 +88,4 @@ class Message
 HTML;
     }
 
-
-    // methode static (on passe le json et renvoie un message)
-    public static function fromJSON()
-    {
-
-    }
 }

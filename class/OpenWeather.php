@@ -2,7 +2,7 @@
 /**
  * Gére l'api d'openWeather
  * 
- * @author Caroline Duon <duon.caroline@gmail.com>
+ * @author Grafikart
  */
 class OpenWeather
 {
