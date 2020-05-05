@@ -1,20 +1,20 @@
 <?php
 require_once '../class/Post.php';
-$pdo = new PDO('sqlite:../data.db', null, null, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ
-]);
+require_once '../class/Connect.php';
+$connection = new Connect('data.db');
+$pdo = $connection->connexion();
+
 $error = null;
 try {
-    if (isset($_POST['name'], $_POST['content'])){
+    if (isset($_POST['name'], $_POST['content'])) {
         $query = $pdo->prepare('INSERT INTO posts (name, content, created_at) VALUES (:name, :content, :created)');
         $query->execute([
             'name' => $_POST['name'],
             'content' => $_POST['content'],
             'created' => time()
         ]);
-            header('Location: /blog/edit.php?id=' . $pdo->lastInsertId());
-            exit();
+        header('Location: /blog/edit.php?id=' . $pdo->lastInsertId());
+        exit();
     }
     $query = $pdo->query('SELECT * FROM posts');
     $posts = $query->fetchAll(PDO::FETCH_CLASS, 'Post');

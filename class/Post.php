@@ -1,10 +1,10 @@
 <?php
 class Post
 {
-    private $id;
-    private $name;
-    private $content;
-    private $created_at;
+    public $id;
+    public $name;
+    public $content;
+    public $created_at;
 
     public function __construct()
     {
